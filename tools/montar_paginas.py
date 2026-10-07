@@ -2,7 +2,7 @@
 Troque V para furar o cache de CSS/JS.
 Marcadores nas páginas: <!--seta-->, <!--estrela--> e <!--zap-->."""
 import os, re, glob
-V = '6'
+V = '7'
 AQUI = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(AQUI)
 BASE = 'https://azeugral.github.io/amanda-reali/'  # CONFIRMAR: trocar quando houver domínio

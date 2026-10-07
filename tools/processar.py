@@ -85,10 +85,17 @@ def main():
         so.resize((lw, lw), Image.LANCZOS).save(os.path.join(IMG, f'amanda-sobre-{lw}.webp'), 'WEBP', quality=84, method=6)
 
     # efeitos: imagens ilustrativas geradas por IA (Figma AI, gemini-3.1-flash-image), em ../_ref/efeitos-ia
-    for n in ('natural', 'boneca', 'gatinho', 'esquilo', 'molhado'):
+    # medidas no original 928x1152: centro da pupila (x, y) e largura do olho (canto a canto).
+    # Recorte 3:2 centrado na pupila e com a mesma escala do olho, para os 5 cards ficarem iguais.
+    OLHO = {'natural': (486, 583, 494), 'boneca': (465, 571, 493), 'gatinho': (458, 571, 470),
+            'esquilo': (458, 583, 458), 'molhado': (458, 583, 446)}
+    for n, (cx, cy, ow) in OLHO.items():
         e = Image.open(os.path.join(REF, 'efeitos-ia', n + '.png')).convert('RGB')
-        e = e.crop((0, 250, 928, 869))  # faixa do olho, 3:2
-        salvar(e, IMG, 'efeito-' + n, (640,), q=80)
+        w = ow * 1.75
+        h = w * 2 / 3
+        y0 = cy - h * .56  # um pouco mais de espaço acima, para os cílios
+        e = e.crop((round(cx - w / 2), round(y0), round(cx + w / 2), round(y0 + h))).resize((640, 427), Image.LANCZOS)
+        e.save(os.path.join(IMG, f'efeito-{n}-640.webp'), 'WEBP', quality=82, method=6)
 
     # favicon: monograma AR em favicon.svg (redesenho do logo oficial); PNG/ICO renderizados a partir dele via Edge headless
 
