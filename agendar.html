@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Agendar · Amanda Reali</title>
+<meta name="description" content="Peça seu horário de extensão de cílios, manutenção, design de sobrancelhas ou maquiagem com a Amanda Reali.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f6d3bd">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Agendar · Amanda Reali">
+<meta property="og:description" content="Peça seu horário de extensão de cílios, manutenção, design de sobrancelhas ou maquiagem com a Amanda Reali.">
+<meta property="og:image" content="https://azeugral.github.io/amanda-reali/og-amanda.jpg">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/icone-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css?v=2">
+</head>
+<body class="interna">
+<a class="sr" href="#conteudo">Pular para o conteúdo</a>
+<div class="progresso" data-prog aria-hidden="true"><i></i></div>
+<header class="topo">
+  <a class="topo-logo" href="./" aria-label="Amanda Reali, início"><span class="marca"><span class="marca-nome">Amanda Reali<svg class="marca-brilho" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.1 10.6 12 12-6.9 1.4-11.1 5.6-12 12-.9-6.4-5.1-10.6-12-12C6.9 10.6 11.1 6.4 12 0z"/><path class="p" d="M21 0c.3 2.2 1.3 3.2 3 3.5-1.7.3-2.7 1.3-3 3.5-.3-2.2-1.3-3.2-3-3.5 1.7-.3 2.7-1.3 3-3.5z" transform="translate(-2 1)"/></svg></span><span class="marca-sub">Lash designer · Sobrancelhas · Maquiagem</span></span></a>
+</header>
+<nav class="barra" aria-label="Principal"><ul class="menu"><li><a href="./">Início</a></li><li><a href="./#servicos">Serviços</a></li><li><a href="trabalhos.html">Trabalhos</a></li><li><a href="agendar.html" aria-current="page">Agendar</a></li></ul></nav>
+<main id="conteudo">
+<section class="secao topo-pag" aria-labelledby="t-ag">
+  <div class="wrap">
+    <div class="cab centro">
+      <p class="rot">Agenda aberta</p>
+      <h1 id="t-ag">Agendar horário</h1>
+      <p class="lead">Preencha o que souber. A mensagem é montada aqui e abre pronta no WhatsApp da Amanda, que responde com os horários livres.</p>
+    </div>
+    <form class="form" data-agendar novalidate>
+      <div class="campo">
+        <label for="nome">Seu nome</label>
+        <input type="text" id="nome" name="nome" autocomplete="given-name" required>
+      </div>
+      <fieldset class="campo">
+        <legend>Serviço</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="servico" value="Extensão de cílios" data-cilios required><span>Extensão de cílios</span></label>
+          <label><input type="radio" name="servico" value="Manutenção dos cílios" data-cilios><span>Manutenção</span></label>
+          <label><input type="radio" name="servico" value="Design de sobrancelhas" data-s="sobrancelha"><span>Sobrancelhas</span></label>
+          <label><input type="radio" name="servico" value="Maquiagem" data-s="make"><span>Maquiagem</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="campo" data-so-cilios>
+        <legend>Técnica</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="tecnica" value="Volume brasileiro"><span>Volume brasileiro</span></label>
+          <label><input type="radio" name="tecnica" value="Fio a fio"><span>Fio a fio</span></label>
+          <label><input type="radio" name="tecnica" value="Volume egípcio"><span>Volume egípcio</span></label>
+          <label><input type="radio" name="tecnica" value="Volume russo"><span>Volume russo</span></label>
+          <label><input type="radio" name="tecnica" value="Quero que a Amanda indique"><span>Quero indicação</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="campo" data-so-cilios>
+        <legend>Já usou extensão?</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="primeira" value="É minha primeira vez"><span>Primeira vez</span></label>
+          <label><input type="radio" name="primeira" value="Já uso extensão"><span>Já uso</span></label>
+          <label><input type="radio" name="primeira" value="Estou com extensão de outra profissional"><span>Estou com extensão de outra profissional</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="campo">
+        <legend>Melhor período</legend>
+        <div class="opcoes">
+          <label><input type="checkbox" name="periodo" value="manhã"><span>Manhã</span></label>
+          <label><input type="checkbox" name="periodo" value="tarde"><span>Tarde</span></label>
+          <label><input type="checkbox" name="periodo" value="noite"><span>Noite</span></label>
+        </div>
+      </fieldset>
+      <div class="campo">
+        <label for="dia">Dia de preferência</label>
+        <input type="text" id="dia" name="dia" placeholder="Ex.: sábado, dia 18, qualquer dia da semana">
+      </div>
+      <div class="campo">
+        <label for="obs">Observações</label>
+        <textarea id="obs" name="obs" placeholder="Alergias, um efeito que você quer (boneca, gatinho...), evento com data marcada."></textarea>
+      </div>
+      <div class="campo">
+        <span class="campo-rot">Prévia da mensagem</span>
+        <div class="previa" aria-live="polite"></div>
+      </div>
+      <div class="envio">
+        <button class="btn" type="submit"><span>Enviar no WhatsApp</span><i><svg class="i-seta" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5"/></svg></i></button>
+        <p class="nota">Sinal para reservar: <em class="a-preencher">a preencher</em></p>
+      </div>
+      <p class="nota">Prefere escrever do seu jeito? <a href="https://wa.me/5515997615548" target="_blank" rel="noopener">Chame direto no WhatsApp</a>.</p>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="rodape">
+  <div class="wrap">
+    <a class="rodape-logo" href="./" aria-label="Amanda Reali, início"><span class="marca"><span class="marca-nome">Amanda Reali<svg class="marca-brilho" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.1 10.6 12 12-6.9 1.4-11.1 5.6-12 12-.9-6.4-5.1-10.6-12-12C6.9 10.6 11.1 6.4 12 0z"/><path class="p" d="M21 0c.3 2.2 1.3 3.2 3 3.5-1.7.3-2.7 1.3-3 3.5-.3-2.2-1.3-3.2-3-3.5 1.7-.3 2.7-1.3 3-3.5z" transform="translate(-2 1)"/></svg></span><span class="marca-sub">Lash designer · Sobrancelhas · Maquiagem</span></span></a>
+    <p class="rodape-frase">Extensão de cílios, design de sobrancelhas e maquiagem</p>
+    <div class="colunas">
+      <div><h4>Páginas</h4><ul><li><a href="./">Início</a></li><li><a href="./#servicos">Serviços</a></li><li><a href="trabalhos.html">Trabalhos</a></li><li><a href="agendar.html">Agendar</a></li></ul></div>
+      <div><h4>Contato</h4><ul><li><a href="https://wa.me/5515997615548" target="_blank" rel="noopener">WhatsApp (15) 99761-5548</a></li><li><a href="https://www.instagram.com/estudioamandareali/" target="_blank" rel="noopener">Instagram @estudioamandareali</a></li></ul></div>
+      <div><h4>Estúdio</h4><ul><li>Cidade: <em class="a-preencher">a preencher</em></li><li>Endereço: <em class="a-preencher">a preencher</em></li><li>Horários: <em class="a-preencher">a preencher</em></li></ul></div>
+    </div>
+    <div class="base"><span>© <span data-ano>2026</span> Estúdio Amanda Reali. Todos os direitos reservados.</span><span>Site por <a href="https://lrgz.com.br" target="_blank" rel="noopener">L R G Z</a></span></div>
+  </div>
+</footer>
+<a hidden class="zap-fixo" href="agendar.html" aria-label="Agendar horário"><svg class="i-estrela" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.1 10.6 12 12-6.9 1.4-11.1 5.6-12 12-.9-6.4-5.1-10.6-12-12C6.9 10.6 11.1 6.4 12 0z"/></svg><span>Agendar</span></a>
+<script src="assets/js/obras.js?v=2"></script>
+<script src="assets/js/site.js?v=2"></script>
+</body>
+</html>

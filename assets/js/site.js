@@ -1,0 +1,194 @@
+/* Amanda Reali · comportamento do site */
+window.CONFIG = {
+  instagram: 'estudioamandareali',
+  whatsapp: '5515997615548'
+};
+
+(function () {
+  var doc = document.documentElement;
+  var reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* abertura */
+  requestAnimationFrame(function () { setTimeout(function () { doc.classList.add('pronto'); }, 60); });
+  document.querySelectorAll('[data-ano]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+
+  /* feixes de linhas finas dos cantos (como no post de apresentação) */
+  document.querySelectorAll('[data-fios]').forEach(function (g) {
+    var d = '';
+    for (var k = 0; k < 26; k++) {
+      var t = k / 25;
+      d += 'M' + (300 - 40 * t) + ' ' + (10 + 120 * t) + 'C' + (210 - 30 * t) + ' ' + (-20 + 90 * t) + ' ' + (150 + 50 * t) + ' ' + (190 - 40 * t) + ' ' + (10 + 60 * t) + ' ' + (300 - 60 * t);
+    }
+    g.innerHTML = '<path d="' + d + '"/>';
+  });
+
+  /* progresso de rolagem e botão fixo */
+  var prog = document.querySelectorAll('[data-prog]');
+  var fixo = document.querySelector('.zap-fixo');
+  function aoRolar() {
+    var t = Math.max(1, doc.scrollHeight - innerHeight);
+    var p = Math.min(1, scrollY / t).toFixed(4);
+    prog.forEach(function (el) { el.style.setProperty('--p', p); });
+    if (fixo) fixo.classList.toggle('vis', scrollY > innerHeight * .7 && scrollY < t - 200);
+  }
+  addEventListener('scroll', aoRolar, { passive: true });
+  aoRolar();
+
+  /* revelar ao rolar */
+  var io = 'IntersectionObserver' in window && !reduz ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' }) : null;
+  function revelar(els) {
+    els.forEach(function (el, i) {
+      el.classList.add('rv');
+      if (!io) { el.classList.add('vis'); return; }
+      el.style.transitionDelay = (i % 4) * 70 + 'ms';
+      io.observe(el);
+    });
+  }
+  revelar(document.querySelectorAll('[data-rv]'));
+
+  /* fotos */
+  var OBRAS = window.OBRAS || [];
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+  function src(o, w) { return 'assets/obras/' + o.id + '-' + w + '.webp'; }
+  function fig(o, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'obra';
+    b.dataset.i = i;
+    b.innerHTML = '<img src="' + src(o, 640) + '" alt="' + esc(o.d) + '" loading="lazy" decoding="async" width="640" height="' + Math.round(640 / o.r) + '">' +
+      '<span class="leg">' + esc(o.d) + '</span>';
+    return b;
+  }
+  var lista = OBRAS;
+  var grade = document.querySelector('[data-grade]');
+  if (grade) {
+    var limite = +grade.dataset.limite || 0;
+    var filtros = document.querySelectorAll('.filtros button');
+    function aplicar(e, empurrar) {
+      lista = e && e !== 'todos' ? OBRAS.filter(function (o) { return o.e === e; }) : OBRAS;
+      grade.innerHTML = '';
+      (limite ? lista.slice(0, limite) : lista).forEach(function (o) { grade.appendChild(fig(o, OBRAS.indexOf(o))); });
+      revelar(grade.querySelectorAll('.obra'));
+      filtros.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.f === (e || 'todos')); });
+      if (empurrar && history.replaceState) history.replaceState(null, '', e && e !== 'todos' ? '?cat=' + e : location.pathname);
+    }
+    filtros.forEach(function (b) {
+      var n = b.dataset.f === 'todos' ? OBRAS.length : OBRAS.filter(function (o) { return o.e === b.dataset.f; }).length;
+      var s = b.querySelector('sup'); if (s) s.textContent = n;
+      b.addEventListener('click', function () { aplicar(b.dataset.f, true); });
+    });
+    var q = new URLSearchParams(location.search).get('cat');
+    aplicar(q === 'cilios' || q === 'make' ? q : 'todos');
+  }
+
+  /* lightbox */
+  var lb = document.querySelector('.lb');
+  if (lb) {
+    var img = lb.querySelector('img');
+    var leg = lb.querySelector('[data-leg]');
+    var cont = lb.querySelector('[data-cont]');
+    var atual = 0, origem = null;
+    function mostrar(k) {
+      var n = lista.length;
+      atual = (k + n) % n;
+      var o = lista[atual];
+      img.style.opacity = 0;
+      var novo = new Image();
+      novo.onload = function () { img.src = novo.src; img.alt = o.d; img.style.opacity = 1; };
+      novo.src = src(o, 1200);
+      leg.textContent = o.d;
+      cont.textContent = String(atual + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0');
+    }
+    function abrirLb(o) {
+      origem = document.activeElement;
+      mostrar(lista.indexOf(o));
+      lb.classList.add('aberto');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      lb.querySelector('[data-fechar]').focus();
+    }
+    function fechar() {
+      lb.classList.remove('aberto');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (origem) origem.focus();
+    }
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('.obra');
+      if (b) abrirLb(OBRAS[+b.dataset.i]);
+    });
+    lb.querySelector('[data-fechar]').addEventListener('click', fechar);
+    lb.querySelector('[data-ant]').addEventListener('click', function () { mostrar(atual - 1); });
+    lb.querySelector('[data-prox]').addEventListener('click', function () { mostrar(atual + 1); });
+    lb.querySelector('.lb-palco').addEventListener('click', function (e) { if (e.target === e.currentTarget) fechar(); });
+    addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('aberto')) return;
+      if (e.key === 'Escape') fechar();
+      if (e.key === 'ArrowLeft') mostrar(atual - 1);
+      if (e.key === 'ArrowRight') mostrar(atual + 1);
+    });
+    var x0 = null;
+    lb.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 50) mostrar(atual + (dx < 0 ? 1 : -1));
+      x0 = null;
+    });
+  }
+
+  /* agendamento: monta a mensagem e abre o WhatsApp */
+  var form = document.querySelector('[data-agendar]');
+  if (form) {
+    var previa = form.querySelector('.previa');
+    var soCilios = form.querySelectorAll('[data-so-cilios]');
+    var pre = new URLSearchParams(location.search).get('servico');
+    if (pre) {
+      var r = form.querySelector('[data-s="' + pre + '"]');
+      if (r) r.checked = true;
+    }
+    function texto() {
+      var f = new FormData(form);
+      var l = ['Oi, Amanda! Vim pelo site e queria agendar um horário.', ''];
+      if (f.get('nome')) l.push('Nome: ' + f.get('nome'));
+      if (f.get('servico')) l.push('Serviço: ' + f.get('servico'));
+      if (cilios() && f.get('tecnica')) l.push('Técnica: ' + f.get('tecnica'));
+      if (cilios() && f.get('primeira')) l.push(f.get('primeira'));
+      var per = f.getAll('periodo');
+      if (per.length) l.push('Período: ' + per.join(', '));
+      if (f.get('dia')) l.push('Dia de preferência: ' + f.get('dia'));
+      if (f.get('obs')) { l.push(''); l.push('Observações: ' + f.get('obs')); }
+      return l.join('\n');
+    }
+    function cilios() {
+      var s = form.querySelector('input[name=servico]:checked');
+      return !s || s.hasAttribute('data-cilios');
+    }
+    function atualizar() {
+      var c = cilios();
+      soCilios.forEach(function (el) { el.hidden = !c; });
+      previa.textContent = texto();
+    }
+    form.addEventListener('input', atualizar);
+    form.addEventListener('change', atualizar);
+    atualizar();
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var erro = form.querySelector('.erro');
+      if (erro) erro.remove();
+      var faltando = !form.nome.value.trim() ? form.nome : !form.querySelector('input[name=servico]:checked') ? form.querySelector('input[name=servico]') : null;
+      if (faltando) {
+        var p = document.createElement('p');
+        p.className = 'erro';
+        p.setAttribute('role', 'alert');
+        p.textContent = faltando.name === 'nome' ? 'Escreva seu nome para a Amanda saber com quem está falando.' : 'Escolha o serviço.';
+        faltando.closest('.campo').after(p);
+        faltando.focus();
+        return;
+      }
+      window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(texto()), '_blank', 'noopener');
+    });
+  }
+})();

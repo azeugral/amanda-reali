@@ -1,0 +1,70 @@
+<!-- titulo: Agendar · Amanda Reali -->
+<!-- desc: Peça seu horário de extensão de cílios, manutenção, design de sobrancelhas ou maquiagem com a Amanda Reali. -->
+---
+<section class="secao topo-pag" aria-labelledby="t-ag">
+  <div class="wrap">
+    <div class="cab centro">
+      <p class="rot">Agenda aberta</p>
+      <h1 id="t-ag">Agendar horário</h1>
+      <p class="lead">Preencha o que souber. A mensagem é montada aqui e abre pronta no WhatsApp da Amanda, que responde com os horários livres.</p>
+    </div>
+    <form class="form" data-agendar novalidate>
+      <div class="campo">
+        <label for="nome">Seu nome</label>
+        <input type="text" id="nome" name="nome" autocomplete="given-name" required>
+      </div>
+      <fieldset class="campo">
+        <legend>Serviço</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="servico" value="Extensão de cílios" data-cilios required><span>Extensão de cílios</span></label>
+          <label><input type="radio" name="servico" value="Manutenção dos cílios" data-cilios><span>Manutenção</span></label>
+          <label><input type="radio" name="servico" value="Design de sobrancelhas" data-s="sobrancelha"><span>Sobrancelhas</span></label>
+          <label><input type="radio" name="servico" value="Maquiagem" data-s="make"><span>Maquiagem</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="campo" data-so-cilios>
+        <legend>Técnica</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="tecnica" value="Volume brasileiro"><span>Volume brasileiro</span></label>
+          <label><input type="radio" name="tecnica" value="Fio a fio"><span>Fio a fio</span></label>
+          <label><input type="radio" name="tecnica" value="Volume egípcio"><span>Volume egípcio</span></label>
+          <label><input type="radio" name="tecnica" value="Volume russo"><span>Volume russo</span></label>
+          <label><input type="radio" name="tecnica" value="Quero que a Amanda indique"><span>Quero indicação</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="campo" data-so-cilios>
+        <legend>Já usou extensão?</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="primeira" value="É minha primeira vez"><span>Primeira vez</span></label>
+          <label><input type="radio" name="primeira" value="Já uso extensão"><span>Já uso</span></label>
+          <label><input type="radio" name="primeira" value="Estou com extensão de outra profissional"><span>Estou com extensão de outra profissional</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="campo">
+        <legend>Melhor período</legend>
+        <div class="opcoes">
+          <label><input type="checkbox" name="periodo" value="manhã"><span>Manhã</span></label>
+          <label><input type="checkbox" name="periodo" value="tarde"><span>Tarde</span></label>
+          <label><input type="checkbox" name="periodo" value="noite"><span>Noite</span></label>
+        </div>
+      </fieldset>
+      <div class="campo">
+        <label for="dia">Dia de preferência</label>
+        <input type="text" id="dia" name="dia" placeholder="Ex.: sábado, dia 18, qualquer dia da semana">
+      </div>
+      <div class="campo">
+        <label for="obs">Observações</label>
+        <textarea id="obs" name="obs" placeholder="Alergias, um efeito que você quer (boneca, gatinho...), evento com data marcada."></textarea>
+      </div>
+      <div class="campo">
+        <span class="campo-rot">Prévia da mensagem</span>
+        <div class="previa" aria-live="polite"></div>
+      </div>
+      <div class="envio">
+        <button class="btn" type="submit"><span>Enviar no WhatsApp</span><i><!--seta--></i></button>
+        <p class="nota">Sinal para reservar: <em class="a-preencher">a preencher</em></p>
+      </div>
+      <p class="nota">Prefere escrever do seu jeito? <a href="<!--zap-->" target="_blank" rel="noopener">Chame direto no WhatsApp</a>.</p>
+    </form>
+  </div>
+</section>
