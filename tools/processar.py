@@ -92,27 +92,27 @@ def main():
 
     # favicon: monograma AR em favicon.svg (redesenho do logo oficial); PNG/ICO renderizados a partir dele via Edge headless
 
-    # prévia de link 1200x630
+    # prévia de link 1200x630. WhatsApp e afins recortam o quadrado do MEIO (x 285–915) na miniatura:
+    # por isso o logo oficial fica centralizado nessa faixa, e as duas fotos em arco ficam nas laterais.
     og = Image.new('RGB', (1200, 630), PESSEGO)
     g = Image.new('L', (1200, 630))
     gd = ImageDraw.Draw(g)
     for y in range(630):
         gd.line((0, y, 1200, y), fill=int(120 * y / 630))
     og.paste(Image.new('RGB', (1200, 630), (242, 196, 170)), (0, 0), g)
-    foto = ImageOps.fit(p, (300, 480), Image.LANCZOS, centering=(.5, .3))
-    masc = Image.new('L', (300 * 4, 480 * 4), 0)
-    ImageDraw.Draw(masc).rounded_rectangle((0, 0, 1199, 1919), radius=600, fill=255)
-    masc = masc.resize((300, 480), Image.LANCZOS)
-    og.paste(foto, (110, 75), masc)
-    d = ImageDraw.Draw(og)
-    d.rounded_rectangle((96, 61, 423, 568), radius=164, outline=TINTA, width=2)
-    d.text((500, 205), 'Amanda Reali', font=fonte(78), fill=TINTA)
-    d.text((504, 318), 'LASH DESIGNER · SOBRANCELHAS · MAQUIAGEM', font=fonte(22, b'SemiBold'), fill=TINTA)
-    d.line((504, 375, 1100, 375), fill=TINTA, width=1)
-    d.text((504, 400), 'Agende pelo WhatsApp', font=fonte(30, b'Regular'), fill=TINTA)
-    estrela(d, 1110, 110, 34, TINTA)
-    estrela(d, 1062, 166, 14, (217, 164, 65))
-    og.save(os.path.join(SITE, 'og-amanda.jpg'), quality=86)
+    def arco(foto, x, w=210, hh=400, y=115, centro=(.5, .3)):
+        f = ImageOps.fit(foto, (w, hh), Image.LANCZOS, centering=centro)
+        m = Image.new('L', (w * 4, hh * 4), 0)
+        ImageDraw.Draw(m).rounded_rectangle((0, 0, w * 4 - 1, hh * 4 - 1), radius=w * 2, fill=255)
+        og.paste(f, (x, y), m.resize((w, hh), Image.LANCZOS))
+        ImageDraw.Draw(og).rounded_rectangle((x - 9, y - 9, x + w + 8, y + hh + 8), radius=w // 2 + 9, outline=TINTA, width=2)
+    arco(p, 42)
+    arco(Image.open(os.path.join(REF, 'cliente', 'amanda-sobre.png')).convert('RGB'), 1200 - 42 - 210, centro=(.55, .4))
+    logo = Image.open(os.path.join(IMG, 'logo-completo-1200.webp')).convert('RGBA')
+    lw = 540
+    logo = logo.resize((lw, round(logo.height * lw / logo.width)), Image.LANCZOS)
+    og.paste(logo, ((1200 - lw) // 2, (630 - logo.height) // 2), logo)
+    og.save(os.path.join(SITE, 'og-amanda-v2.jpg'), quality=88)
     print(len(lista), 'fotos;', sum(o['e'] == C for o in lista), 'de cílios')
 
 if __name__ == '__main__':

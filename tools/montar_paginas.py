@@ -28,7 +28,10 @@ HEAD = '''<!doctype html>
 <meta property="og:type" content="website">
 <meta property="og:title" content="{titulo}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="{base}og-amanda.jpg">
+<meta property="og:image" content="{base}og-amanda-v2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo Amanda Reali, lash designer, sobrancelhas e maquiagem">
 <meta property="og:locale" content="pt_BR">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
