@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="455 25 925 530">
+  <!-- Monograma AR redesenhado a partir do logo oficial: A de contraste alto, R que nasce da perna do A, laço fino e as duas estrelas -->
+  <g fill="#203241" stroke="#fdf5ef" stroke-width="14" stroke-linejoin="round" paint-order="stroke">
+    <!-- laço fino que atravessa o A -->
+    <path fill="none" stroke="#203241" stroke-width="9" stroke-linecap="round" d="M1060 515C900 525 830 330 700 285 600 252 500 300 478 380 460 450 520 500 610 505" style="paint-order:normal"/>
+    <!-- perna fina do A -->
+    <path d="M808 60 818 60 640 488H668V505H572V488H612Z"/>
+    <!-- perna grossa do A, que vira a haste do R -->
+    <path d="M800 40H840L1000 488H1030V505H900V488H930L812 150Z"/>
+    <!-- barriga do R -->
+    <path d="M900 150H985C1090 150 1145 200 1145 262 1145 330 1080 352 1000 352L992 330C1050 330 1100 305 1100 262 1100 210 1060 175 985 175H900Z"/>
+    <!-- perna do R em curva, terminando no rabicho -->
+    <path d="M985 345C1060 350 1110 420 1180 470 1240 512 1300 515 1360 482L1366 490C1300 535 1220 540 1160 498 1090 450 1050 380 980 362Z"/>
+    <!-- estrelas -->
+    <path d="M1228 212C1233 252 1250 268 1284 273 1250 278 1233 294 1228 334 1223 294 1206 278 1172 273 1206 268 1223 252 1228 212Z"/>
+    <path d="M1176 332C1179 352 1188 361 1206 364 1188 367 1179 376 1176 398 1173 376 1164 367 1146 364 1164 361 1173 352 1176 332Z"/>
+  </g>
+</svg>

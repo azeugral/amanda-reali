@@ -77,20 +77,18 @@ def main():
     p = p.crop((168, 132, 526, 738))
     salvar(p, IMG, 'amanda', (358,), q=88)
 
-    # favicon: estrela de 4 pontas em tinta sobre pêssego, com o brilho dourado
-    def icone(t, fundo=True):
-        s = 4
-        im = Image.new('RGBA', (t * s, t * s), PESSEGO + (255,) if fundo else (0, 0, 0, 0))
-        d = ImageDraw.Draw(im)
-        if not fundo:
-            d.rounded_rectangle((0, 0, t * s - 1, t * s - 1), radius=0, fill=PESSEGO + (255,))
-        estrela(d, t * s * .46, t * s * .54, t * s * .40, TINTA)
-        estrela(d, t * s * .80, t * s * .20, t * s * .14, (217, 164, 65))
-        return im.resize((t, t), Image.LANCZOS)
-    icone(180).convert('RGB').save(os.path.join(IMG, 'icone-180.png'))
-    icone(512).convert('RGB').save(os.path.join(IMG, 'icone-512.png'))
-    icone(32).save(os.path.join(SITE, 'favicon-32.png'))
-    icone(48).save(os.path.join(SITE, 'favicon.ico'), sizes=[(16, 16), (32, 32), (48, 48)])
+    # foto do Sobre: Amanda.jpg do zip (só 100 px; ampliada 4x até chegar a original). CONFIRMAR
+    s = Image.open(os.path.join(ORIG, 'Amanda.jpg')).convert('RGB')
+    s = s.resize((400, 400), Image.LANCZOS).filter(ImageFilter.UnsharpMask(radius=1.2, percent=60, threshold=2))
+    s.save(os.path.join(IMG, 'amanda-sobre-400.webp'), 'WEBP', quality=88, method=6)
+
+    # efeitos: imagens ilustrativas geradas por IA (Figma AI, gemini-3.1-flash-image), em ../_ref/efeitos-ia
+    for n in ('natural', 'boneca', 'gatinho', 'esquilo', 'molhado'):
+        e = Image.open(os.path.join(REF, 'efeitos-ia', n + '.png')).convert('RGB')
+        e = e.crop((0, 250, 928, 869))  # faixa do olho, 3:2
+        salvar(e, IMG, 'efeito-' + n, (640,), q=80)
+
+    # favicon: monograma AR em favicon.svg (redesenho do logo oficial); PNG/ICO renderizados a partir dele via Edge headless
 
     # prévia de link 1200x630
     og = Image.new('RGB', (1200, 630), PESSEGO)

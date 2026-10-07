@@ -12,6 +12,23 @@ window.CONFIG = {
   requestAnimationFrame(function () { setTimeout(function () { doc.classList.add('pronto'); }, 60); });
   document.querySelectorAll('[data-ano]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
+  /* gaveta do menu (celular) */
+  var abrir = document.querySelector('.nav-abrir');
+  var gaveta = document.querySelector('.nav-menu');
+  if (abrir && gaveta) {
+    function alternar(a) {
+      abrir.setAttribute('aria-expanded', a);
+      abrir.querySelector('span').textContent = a ? 'Fechar' : 'Menu';
+      gaveta.classList.toggle('aberta', a);
+      abrir.parentNode.classList.toggle('menu-aberto', a);
+      document.body.style.overflow = a ? 'hidden' : '';
+    }
+    abrir.addEventListener('click', function () { alternar(abrir.getAttribute('aria-expanded') !== 'true'); });
+    gaveta.addEventListener('click', function (e) { if (e.target.closest('a') && abrir.getAttribute('aria-expanded') === 'true') alternar(false); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape' && abrir.getAttribute('aria-expanded') === 'true') { alternar(false); abrir.focus(); } });
+    matchMedia('(min-width: 1080px)').addEventListener('change', function (m) { if (m.matches) alternar(false); });
+  }
+
   /* feixes de linhas finas dos cantos (como no post de apresentação) */
   document.querySelectorAll('[data-fios]').forEach(function (g) {
     var d = '';

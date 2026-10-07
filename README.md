@@ -4,7 +4,7 @@ Site da lash designer Amanda Reali ([@estudioamandareali](https://www.instagram.
 
 Prévia: https://azeugral.github.io/amanda-reali/ (com `noindex` até ter domínio).
 
-## Identidade v1
+## Identidade (v2, 06/10)
 
 Tirada do post de apresentação dela ("Um novo conceito de beleza"), em `../_ref/identidade.webp`.
 
@@ -14,8 +14,16 @@ Tirada do post de apresentação dela ("Um novo conceito de beleza"), em `../_re
   - a estrela de 4 pontas;
   - a moldura em arco com o texto curvo por cima, igual ao post;
   - os feixes de linhas finas nos cantos da abertura.
-- **Logo:** por enquanto é uma marca em texto, "Amanda Reali" com a estrela e o subtítulo. Fica em `LOGO`, dentro de `tools/montar_paginas.py`.
-- **Favicon:** a estrela em tinta com um brilho dourado sobre pêssego, gerada por `tools/processar.py`.
+- **Nav (v2):** convencional e mobile first.
+  - Logo na esquerda máxima: o monograma AR mais "Amanda Reali".
+  - Menu à direita, com o botão Agendar, a partir de 1080 px.
+  - Abaixo disso, botão "Menu" que abre uma gaveta de tela cheia.
+- **Monograma AR:** `assets/img/monograma.svg`, redesenhado em SVG a partir do logo oficial que o usuário mandou no chat (o arquivo original não chegou ao disco).
+  - Tem A de contraste alto, R saindo da perna do A, o laço e as duas estrelas.
+  - No logo do topo, o nome segue em Montserrat.
+- **Favicon:** `favicon.svg` traz o AR sem o laço (ilegível em 16 px), sem fundo e com contorno creme fino, para ler em aba escura.
+  - Os PNG/ICO foram renderizados a partir dele com Edge headless.
+  - O `icone-180` (iOS) leva fundo creme.
 - **Botões:** retos, com duas células: rótulo e ícone. No hover, a estrela gira 90° e a célula fica dourada.
 
 ## Estrutura
@@ -54,8 +62,12 @@ Os itens pendentes aparecem no site como "✦ a preencher", com sublinhado trace
 - [ ] **Sobre:** desde quando atende, formação, cursos.
 - [ ] **Sinal** para reservar, e a duração média da aplicação.
 - [ ] **Cuidados:** a lista atual é a padrão do mercado. Ela confere.
-- [ ] **Foto dela:** a atual foi recortada do post (cerca de 360 px). Pedir uma foto original em alta.
-- [ ] **Logo definitivo:** se ela tiver um, ele entra no lugar da marca em texto.
+- [ ] **Fotos dela:**
+  - Abertura: recortada do post, com cerca de 360 px.
+  - Sobre: `Amanda.jpg` do zip, que tem só **100 px** e foi ampliada 4x, por isso fica borrada.
+  - Pedir as originais em alta.
+- [ ] **Logo oficial em arquivo** (PNG/SVG): usar no lugar do monograma redesenhado e conferir o desenho.
+- [ ] **Efeitos:** as 5 imagens são **ilustrativas, geradas por IA** (Figma AI, gemini-3.1-flash-image). Ficam em `../_ref/efeitos-ia`, e o site avisa isso abaixo da seção. Trocar por fotos reais dela, se tiver.
 - [ ] **Adega Realledo:** está na bio e ficou fora do site.
 - [ ] **Domínio:** trocar `BASE` em `tools/montar_paginas.py` e o `<base>` do 404, tirar o `noindex` e liberar o `robots.txt`.
 
