@@ -72,15 +72,17 @@ def main():
     open(os.path.join(SITE, 'assets', 'js', 'obras.js'), 'w', encoding='utf-8').write(
         'window.OBRAS = ' + json.dumps(lista, ensure_ascii=False, separators=(',', ':')) + ';\n')
 
-    # foto dela: miolo da moldura oval do post de apresentação
-    p = Image.open(os.path.join(REF, 'identidade.webp')).convert('RGB')
-    p = p.crop((168, 132, 526, 738))
-    salvar(p, IMG, 'amanda', (358,), q=88)
-
-    # foto do Sobre: Amanda.jpg do zip (só 100 px; ampliada 4x até chegar a original). CONFIRMAR
-    s = Image.open(os.path.join(ORIG, 'Amanda.jpg')).convert('RGB')
-    s = s.resize((400, 400), Image.LANCZOS).filter(ImageFilter.UnsharpMask(radius=1.2, percent=60, threshold=2))
-    s.save(os.path.join(IMG, 'amanda-sobre-400.webp'), 'WEBP', quality=88, method=6)
+    # fotos dela em alta (enviadas pelo usuário em 06/10)
+    h = Image.open(os.path.join(REF, 'cliente', 'amanda-hero.png')).convert('RGB')
+    w = round(h.height * 358 / 560)  # proporção do arco da abertura
+    x = (h.width - w) // 2
+    h = h.crop((x, 0, x + w, h.height))
+    for lw in (420, 760):
+        h.resize((lw, round(h.height * lw / h.width)), Image.LANCZOS).save(os.path.join(IMG, f'amanda-{lw}.webp'), 'WEBP', quality=84, method=6)
+    p = h  # base da prévia de link
+    so = Image.open(os.path.join(REF, 'cliente', 'amanda-sobre.png')).convert('RGB')
+    for lw in (420, 800):
+        so.resize((lw, lw), Image.LANCZOS).save(os.path.join(IMG, f'amanda-sobre-{lw}.webp'), 'WEBP', quality=84, method=6)
 
     # efeitos: imagens ilustrativas geradas por IA (Figma AI, gemini-3.1-flash-image), em ../_ref/efeitos-ia
     for n in ('natural', 'boneca', 'gatinho', 'esquilo', 'molhado'):
@@ -97,7 +99,7 @@ def main():
     for y in range(630):
         gd.line((0, y, 1200, y), fill=int(120 * y / 630))
     og.paste(Image.new('RGB', (1200, 630), (242, 196, 170)), (0, 0), g)
-    foto = p.resize((300, round(p.height * 300 / p.width)), Image.LANCZOS).crop((0, 0, 300, 480))
+    foto = ImageOps.fit(p, (300, 480), Image.LANCZOS, centering=(.5, .3))
     masc = Image.new('L', (300 * 4, 480 * 4), 0)
     ImageDraw.Draw(masc).rounded_rectangle((0, 0, 1199, 1919), radius=600, fill=255)
     masc = masc.resize((300, 480), Image.LANCZOS)

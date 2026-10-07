@@ -26,6 +26,8 @@ Tirada do post de apresentação dela ("Um novo conceito de beleza"), em `../_re
 - **Favicon:** o AR original sobre pêssego, num quadrado de cantos arredondados (`favicon-32.png`, `favicon.ico`, `icone-512.png`). O `icone-180` (iOS) fica quadrado, porque o iOS já arredonda.
 - **Botões:** retos, com duas células: rótulo e ícone. No hover, a estrela gira 90° e a célula fica dourada.
 
+Fotos dela em alta (06/10): `../_ref/cliente/amanda-hero.png` vai no arco da abertura e `amanda-sobre.png` no Sobre.
+
 ## Estrutura
 
 | Arquivo | O que é |
@@ -62,10 +64,6 @@ Os itens pendentes aparecem no site como "✦ a preencher", com sublinhado trace
 - [ ] **Sobre:** desde quando atende, formação, cursos.
 - [ ] **Sinal** para reservar, e a duração média da aplicação.
 - [ ] **Cuidados:** a lista atual é a padrão do mercado. Ela confere.
-- [ ] **Fotos dela:**
-  - Abertura: recortada do post, com cerca de 360 px.
-  - Sobre: `Amanda.jpg` do zip, que tem só **100 px** e foi ampliada 4x, por isso fica borrada.
-  - Pedir as originais em alta.
 - [ ] **Efeitos:** as 5 imagens são **ilustrativas, geradas por IA** (Figma AI, gemini-3.1-flash-image). Ficam em `../_ref/efeitos-ia`, e o site avisa isso abaixo da seção. Trocar por fotos reais dela, se tiver.
 - [ ] **Adega Realledo:** está na bio e ficou fora do site.
 - [ ] **Domínio:** trocar `BASE` em `tools/montar_paginas.py` e o `<base>` do 404, tirar o `noindex` e liberar o `robots.txt`.
