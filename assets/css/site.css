@@ -49,14 +49,13 @@ p{margin:0 0 1em}
 /* ---------- nav convencional: logo na esquerda máxima, menu à direita; gaveta no celular ---------- */
 .nav{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px;padding:10px var(--g);background:rgba(253,245,239,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--linha);transition:background .35s var(--ease)}
 .nav-logo{display:block;text-decoration:none;flex:none;position:relative;z-index:2}
-.marca{display:flex;align-items:center;gap:12px;color:var(--tinta)}
-.marca-ar{width:auto;height:34px;flex:none}
-.marca-txt{display:grid;justify-items:start;gap:5px}
-@media (min-width:1080px){.marca-ar{height:44px}}
-.marca-nome{position:relative;font:500 22px/1 var(--fonte);letter-spacing:-.01em;white-space:nowrap}
-.marca-brilho{position:absolute;right:-.62em;top:-.4em;width:.5em;height:.5em;fill:var(--tinta)}
-.marca-brilho .p{fill:var(--ouro)}
-.marca-sub{font:600 7.5px/1.3 var(--fonte);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;color:var(--cinza)}
+.marca{display:block}
+.marca img{display:block;width:auto;height:30px}
+@media (min-width:380px){.marca img{height:34px}}
+@media (min-width:1080px){.marca img{height:40px}}
+@media (min-width:1180px){.marca img{height:56px}}
+.marca img{opacity:0;transition:opacity .8s var(--ease)}
+.pronto .marca img{opacity:1}
 .nav-abrir{position:relative;z-index:2;display:inline-flex;align-items:center;gap:12px;min-height:44px;padding:0 0 0 14px;background:none;border:0;cursor:pointer;font:600 11px/1 var(--fonte);letter-spacing:.2em;text-transform:uppercase;color:var(--tinta);-webkit-tap-highlight-color:transparent}
 .nav-abrir i{position:relative;width:22px;height:9px}
 .nav-abrir i::before,.nav-abrir i::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:currentColor;transition:transform .4s var(--ease),top .4s var(--ease)}
@@ -75,12 +74,9 @@ p{margin:0 0 1em}
 .nav-menu.aberta li:nth-child(5) a{transition-delay:.16s}
 .menu a[aria-current]::after{content:"";width:12px;height:12px;background:var(--ouro);clip-path:path("M6 0C6.4 3.2 8.6 5.3 12 6 8.6 6.7 6.4 8.8 6 12 5.6 8.8 3.4 6.7 0 6 3.4 5.3 5.6 3.2 6 0Z")}
 .nav-menu .btn{align-self:stretch}
-@media (min-width:380px){.marca-nome{font-size:24px}.marca-sub{font-size:8px}}
 @media (min-width:1080px){
   .nav{min-height:84px;padding:0 clamp(24px,3vw,48px)}
-  .marca-nome{font-size:27px}
-  .marca-sub{font-size:8.5px}
-  .nav-abrir{display:none}
+      .nav-abrir{display:none}
   .nav-menu{position:static;flex-direction:row;align-items:center;gap:clamp(20px,2.4vw,40px);padding:0;background:none;opacity:1;visibility:visible}
   .menu{display:flex;gap:clamp(18px,2.2vw,36px)}
   .menu a{position:relative;padding:8px 0;border:0;font:600 11.5px/1 var(--fonte);letter-spacing:.18em;text-transform:uppercase;color:var(--cinza);opacity:1;transform:none;transition:color .3s var(--ease)}
@@ -90,8 +86,6 @@ p{margin:0 0 1em}
   .menu a[aria-current]::after{display:none}
   .nav-menu .btn{align-self:auto}
 }
-.marca{opacity:0;transition:opacity .8s var(--ease)}
-.pronto .marca{opacity:1}
 
 /* ---------- botões: duas células retas, rótulo + ícone; a célula do ícone gira a estrela ---------- */
 .btn{display:inline-flex;align-items:stretch;min-height:54px;padding:0;text-decoration:none;font:600 12px/1 var(--fonte);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border:1px solid var(--tinta);background:var(--tinta);color:var(--creme);position:relative;overflow:hidden;isolation:isolate;transition:color .4s var(--ease),background .4s var(--ease),border-color .4s var(--ease),transform .2s var(--ease);-webkit-tap-highlight-color:transparent}
@@ -157,7 +151,7 @@ p{margin:0 0 1em}
   .arco{width:330px;margin:48px 0 0 40px}
 }
 @media (max-width:560px){.hero-sub span{display:block}.hero-sub span+span::before{content:none}}
-@media (prefers-reduced-motion:reduce){.arco,.hero-texto>*,.marca{opacity:1!important;transform:none!important;transition:none!important}}
+@media (prefers-reduced-motion:reduce){.arco,.hero-texto>*,.marca img{opacity:1!important;transform:none!important;transition:none!important}}
 
 /* ---------- seções ---------- */
 .secao{padding:clamp(76px,10vw,128px) 0}
@@ -279,13 +273,8 @@ p{margin:0 0 1em}
 /* ---------- rodapé ---------- */
 .rodape{padding:clamp(56px,7vw,84px) 0 28px;background:linear-gradient(180deg,var(--creme2),var(--pessego));text-align:center}
 .rodape .wrap{display:grid;justify-items:center;gap:30px}
-.rodape-logo{text-decoration:none}
-.rodape-logo .marca{flex-direction:column;gap:14px}
-.rodape-logo .marca-ar{height:72px}
-.rodape-logo .marca-txt{justify-items:center}
-.rodape-logo .marca-nome{font-size:clamp(28px,3.6vw,36px)}
-.rodape-logo .marca-sub{font-size:9.5px}
-.rodape-frase{font-size:14px;color:var(--cinza);margin:-6px 0 0}
+.rodape-logo{text-decoration:none;display:block}
+.logo-completo{width:min(400px,78vw);height:auto}
 .colunas{display:grid;grid-template-columns:1fr;gap:26px;width:100%;max-width:860px;padding:30px 0;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
 @media (min-width:720px){.colunas{grid-template-columns:repeat(3,1fr)}}
 .rodape h4{margin:0 0 12px;font:600 11px/1.4 var(--fonte);letter-spacing:.22em;text-transform:uppercase;color:var(--tinta)}
@@ -353,7 +342,5 @@ p{margin:0 0 1em}
 .p404{min-height:70svh;display:flex;align-items:center}
 .p404 .lead{margin:24px auto 32px}
 @media (max-width:479px){.acoes .btn,.envio .btn{flex:1 1 100%}.btn>span{flex:1;justify-content:center}}
-@media (max-width:479px){.nav .marca-sub{display:none}.nav .marca-nome{font-size:20px}.nav .marca-ar{height:30px}.nav .marca{gap:10px}}
-.rodape-logo .marca-sub{white-space:normal;text-align:center;line-height:1.7}
-@media (max-width:359px){.nav{gap:8px}.nav .marca-nome{font-size:18px}.nav .marca-ar{height:26px}.nav-abrir{padding-left:6px;gap:8px}}
-.nav.menu-aberto{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--creme)}
+.rodape-logo .nav.menu-aberto{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--creme)}
+@media (max-width:359px){.nav{gap:8px}.nav-abrir{padding-left:6px;gap:8px}}

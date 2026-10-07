@@ -2,7 +2,7 @@
 Troque V para furar o cache de CSS/JS.
 Marcadores nas páginas: <!--seta-->, <!--estrela--> e <!--zap-->."""
 import os, re, glob
-V = '4'
+V = '5'
 AQUI = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(AQUI)
 BASE = 'https://azeugral.github.io/amanda-reali/'  # CONFIRMAR: trocar quando houver domínio
@@ -12,7 +12,9 @@ SETA = '<svg class="i-seta" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9
 # estrela de 4 pontas do post de apresentação dela
 ESTRELA = '<svg class="i-estrela" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.1 10.6 12 12-6.9 1.4-11.1 5.6-12 12-.9-6.4-5.1-10.6-12-12C6.9 10.6 11.1 6.4 12 0z"/></svg>'
 
-LOGO = '''<span class="marca"><img class="marca-ar" src="assets/img/monograma.svg" alt="" width="925" height="530"><span class="marca-txt"><span class="marca-nome">Amanda Reali</span><span class="marca-sub">Lash designer · Sobrancelhas · Maquiagem</span></span></span>'''.format(estrela='<svg class="marca-brilho" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.9 6.4 5.1 10.6 12 12-6.9 1.4-11.1 5.6-12 12-.9-6.4-5.1-10.6-12-12C6.9 10.6 11.1 6.4 12 0z"/><path class="p" d="M21 0c.3 2.2 1.3 3.2 3 3.5-1.7.3-2.7 1.3-3 3.5-.3-2.2-1.3-3.2-3-3.5 1.7-.3 2.7-1.3 3-3.5z" transform="translate(-2 1)"/></svg>')
+LOGO = ('<picture class="marca"><source media="(min-width:1180px)" srcset="assets/img/logo-nav.webp">'
+        '<img src="assets/img/logo-nav-curto.webp" alt="Amanda Reali · Lash designer, sobrancelhas e maquiagem" width="1000" height="172"></picture>')
+LOGO_RODAPE = '<img class="logo-completo" src="assets/img/logo-completo-640.webp" srcset="assets/img/logo-completo-640.webp 640w, assets/img/logo-completo-1200.webp 1200w" sizes="(min-width:720px) 420px, 80vw" alt="Amanda Reali · Lash designer, sobrancelhas e maquiagem" width="1200" height="659" loading="lazy">'
 
 HEAD = '''<!doctype html>
 <html lang="pt-BR">
@@ -29,7 +31,6 @@ HEAD = '''<!doctype html>
 <meta property="og:image" content="{base}og-amanda.jpg">
 <meta property="og:locale" content="pt_BR">
 <link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/icone-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,8 +52,7 @@ HEAD = '''<!doctype html>
 FOOT = '''</main>
 <footer class="rodape">
   <div class="wrap">
-    <a class="rodape-logo" href="./" aria-label="Amanda Reali, início">{logo}</a>
-    <p class="rodape-frase">Extensão de cílios, design de sobrancelhas e maquiagem</p>
+    <a class="rodape-logo" href="./" aria-label="Amanda Reali, início">{logo_rodape}</a>
     <div class="colunas">
       <div><h4>Páginas</h4><ul><li><a href="./">Início</a></li><li><a href="./#servicos">Serviços</a></li><li><a href="trabalhos.html">Trabalhos</a></li><li><a href="agendar.html">Agendar</a></li></ul></div>
       <div><h4>Contato</h4><ul><li><a href="{zap}" target="_blank" rel="noopener">WhatsApp (15) 99761-5548</a></li><li><a href="https://www.instagram.com/estudioamandareali/" target="_blank" rel="noopener">Instagram @estudioamandareali</a></li></ul></div>
@@ -87,7 +87,7 @@ for f in glob.glob(os.path.join(AQUI, 'paginas', '*.html')):
     menu = ''.join(f'<li><a href="{h}"' + (ATUAL if h == atual else '') + f'>{t}</a></li>' for h, t in MENU)
     html = HEAD.format(titulo=meta['titulo'], desc=meta['desc'], base=BASE, v=V, menu=menu, logo=LOGO, estrela=ESTRELA,
                        corpo='inicio' if nome == 'index.html' else 'interna') + corpo + \
-        FOOT.format(v=V, logo=LOGO, zap=ZAP, estrela=ESTRELA, extra=LB if meta.get('lightbox') == 'sim' else '')
+        FOOT.format(v=V, logo=LOGO, logo_rodape=LOGO_RODAPE, zap=ZAP, estrela=ESTRELA, extra=LB if meta.get('lightbox') == 'sim' else '')
     if nome == '404.html':
         html = html.replace('<head>', '<head>\n<base href="/amanda-reali/">', 1)
     if nome == 'agendar.html':

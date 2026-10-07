@@ -18,12 +18,12 @@ Tirada do post de apresentação dela ("Um novo conceito de beleza"), em `../_re
   - Logo na esquerda máxima: o monograma AR mais "Amanda Reali".
   - Menu à direita, com o botão Agendar, a partir de 1080 px.
   - Abaixo disso, botão "Menu" que abre uma gaveta de tela cheia.
-- **Monograma AR:** `assets/img/monograma.svg`, redesenhado em SVG a partir do logo oficial que o usuário mandou no chat (o arquivo original não chegou ao disco).
-  - Tem A de contraste alto, R saindo da perna do A, o laço e as duas estrelas.
-  - No logo do topo, o nome segue em Montserrat.
-- **Favicon:** `favicon.svg` traz o AR sem o laço (ilegível em 16 px), sem fundo e com contorno creme fino, para ler em aba escura.
-  - Os PNG/ICO foram renderizados a partir dele com Edge headless.
-  - O `icone-180` (iOS) leva fundo creme.
+- **Logo oficial:** o original fica em `../_ref/cliente/logo-oficial.png`, com fundo transparente. A tinta foi trocada pela do site (#203241).
+  - O `tools/logo.py` gera as peças:
+    - nav em linha: AR + "AMANDA REALI" + subtítulo a partir de 1180 px, e sem o subtítulo abaixo disso;
+    - logo completo no rodapé;
+    - favicon.
+- **Favicon:** o AR original sobre pêssego, num quadrado de cantos arredondados (`favicon-32.png`, `favicon.ico`, `icone-512.png`). O `icone-180` (iOS) fica quadrado, porque o iOS já arredonda.
 - **Botões:** retos, com duas células: rótulo e ícone. No hover, a estrela gira 90° e a célula fica dourada.
 
 ## Estrutura
@@ -66,7 +66,6 @@ Os itens pendentes aparecem no site como "✦ a preencher", com sublinhado trace
   - Abertura: recortada do post, com cerca de 360 px.
   - Sobre: `Amanda.jpg` do zip, que tem só **100 px** e foi ampliada 4x, por isso fica borrada.
   - Pedir as originais em alta.
-- [ ] **Logo oficial em arquivo** (PNG/SVG): usar no lugar do monograma redesenhado e conferir o desenho.
 - [ ] **Efeitos:** as 5 imagens são **ilustrativas, geradas por IA** (Figma AI, gemini-3.1-flash-image). Ficam em `../_ref/efeitos-ia`, e o site avisa isso abaixo da seção. Trocar por fotos reais dela, se tiver.
 - [ ] **Adega Realledo:** está na bio e ficou fora do site.
 - [ ] **Domínio:** trocar `BASE` em `tools/montar_paginas.py` e o `<base>` do 404, tirar o `noindex` e liberar o `robots.txt`.
